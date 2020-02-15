@@ -1,9 +1,11 @@
 import pygame
-
+import cv2
+import numpy
 
 class GameGraphics:
     def __init__(self,game):
         self.game = game
+        self.detector = game.detector
 
         self.size_x = 1280
         self.size_y = 720
@@ -24,6 +26,16 @@ class GameGraphics:
 
         self.graph_ratio = self.ground_len / self.game.max_pos
 
+        self.figure_x = 50
+        self.figure_y = 50
+        self.figure_size_x = 150
+        self.figure_size_y = 200
+        self.figure_img = self.detector.getLastFrame()
+        self.figure_img = cv2.cvtColor(self.figure_img,cv2.COLOR_BGR2RGB)
+        self.figure_img = numpy.rot90(self.figure_img)
+        self.figure_img = pygame.surfarray.make_surface(self.figure_img )
+        self.figure_img = pygame.transform.scale(self.figure_img, (self.figure_size_x, self.figure_size_y))
+
         self.dino_img = pygame.image.load('dino.png')
         self.dino_size_x = 100
         self.dino_size_y = 100
@@ -42,6 +54,10 @@ class GameGraphics:
         dino_pos_x = self.game.dino_pos * self.graph_ratio + self.ground_x
         dino_pos_y = self.ground_y - self.dino_size_y + -self.graph_ratio * self.game.dino_y
         self.game_display.blit(self.dino_img, (dino_pos_x, dino_pos_y))
+
+        figure_pos_x = self.game.figure_x * self.graph_ratio
+        figure_pos_y = self.game.figure_y * self.graph_ratio
+        self.game_display.blit(self.figure_img, (figure_pos_x, figure_pos_y))
 
         for tree_pos in self.game.trees:
             tree_pos_x = tree_pos * self.graph_ratio + self.ground_x

@@ -23,11 +23,9 @@ class Game:
 
         self.failed = True
 
-
-        self.graphics = game_graphics.GameGraphics(self)
-
         self.detector = detector
 
+        self.graphics = game_graphics.GameGraphics(self)
 
 
     def step(self):
