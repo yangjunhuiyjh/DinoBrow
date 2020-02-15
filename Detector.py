@@ -10,8 +10,10 @@ class Detector():
         self.coordinates = np.zeros((68,2))
         self.detector = dlib.get_frontal_face_detector()
         self.predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+        self.lastFrame = None
         print("detector started")
         _thread.start_new_thread(self.readFrame, ())
+
 
     def readFrame(self):
         print("reading new frame")
