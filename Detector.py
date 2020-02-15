@@ -43,8 +43,8 @@ class Detector():
         return self.coordinates
 
     def getAvePoints(self):
-        face_ave_height = np.mean(self.coordinates, axis = 0)[1]
-        brow_ave_height = np.mean(self.coordinates[18:27], axis = 0)[1]
+        face_ave_height = np.mean(self.coordinates[:, 1], axis = 0)
+        brow_ave_height = np.mean(self.coordinates[18:28, 1], axis = 0)
         print(face_ave_height, brow_ave_height)
         return (face_ave_height, brow_ave_height)
 
