@@ -64,7 +64,10 @@ class Game:
 
         rand_float = random.random()
         if rand_float <= self.new_tree_prob:
-            prev_tree_pos = self.trees[-1]
+            if len(self.trees)>0:
+                prev_tree_pos = self.trees[-1]
+            else:
+                prev_tree_pos = 0
             if self.max_pos - prev_tree_pos > 20 or self.max_pos - prev_tree_pos < 8:
                 self.trees.append(self.max_pos - 1)
 

@@ -29,7 +29,6 @@ class GameGraphics:
         self.figure_x = 50
         self.figure_y = 50
         self.figure_size_x = 150
-        self.figure_size_y = 200
 
         self.figure_img = None
 
@@ -57,8 +56,9 @@ class GameGraphics:
         self.figure_img = self.detector.getLastFrame()
         self.figure_img = cv2.cvtColor(self.figure_img, cv2.COLOR_BGR2RGB)
         self.figure_img = numpy.rot90(self.figure_img)
+        img_ratio = self.figure_img.shape[1]/self.figure_img.shape[0]
         self.figure_img = pygame.surfarray.make_surface(self.figure_img)
-        self.figure_img = pygame.transform.scale(self.figure_img, (self.figure_size_x, self.figure_size_y))
+        self.figure_img = pygame.transform.scale(self.figure_img, (self.figure_size_x, int(self.figure_size_x*img_ratio)))
 
         dino_pos_x = self.game.dino_pos * self.graph_ratio + self.ground_x
         dino_pos_y = self.ground_y - self.dino_size_y + -self.graph_ratio * self.game.dino_y
