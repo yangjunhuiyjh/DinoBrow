@@ -41,6 +41,7 @@ class Detector():
     def getKeyPoints(self):
         return self.coordinates
 
-detector = Detector()
-while True:
-    detector.getKeyPoints()
+if __name__ == "__main__":
+    detector = Detector()
+    while True:
+        detector.getKeyPoints()
