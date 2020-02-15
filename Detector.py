@@ -46,8 +46,8 @@ class Detector():
         face_max = np.amax(self.coordinates[:, 1])
         face_min = np.amin(self.coordinates[:, 1])
         brow_ave_height = (self.coordinates[20, 1] + self.coordinates[25, 1])/2
-        print(face_max, face_ave_height, brow_ave_height)
-        return (face_max, face_ave_height, brow_ave_height)
+        print(face_max, face_min, brow_ave_height)
+        return (face_max, face_min, brow_ave_height)
 
 if __name__ == "__main__":
     detector = Detector()
