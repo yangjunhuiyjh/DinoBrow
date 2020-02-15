@@ -10,11 +10,17 @@ class Game:
         self.min_pos = 0
         self.max_pos = 100
 
+        self.trees2 = [60, 90]
+        self.dino_pos2 = 20
+
         self.new_tree_prob = 0.01
 
 
         self.dino_y = 0
         self.dino_dy = 0
+
+        self.dino_y2 = 0
+        self.dino_dy2 = 0
 
         self.speed_x = -30
 
@@ -22,6 +28,7 @@ class Game:
 
 
         self.failed = True
+        self.failed2 = True
 
 
         self.graphics = game_graphics.GameGraphics(self)
@@ -40,6 +47,12 @@ class Game:
             self.dino_y = 0
             self.dino_dy = 0
 
+        self.dino_y2 += self.dino_dy2 * dt
+        self.dino_dy2 += g * dt
+        if self.dino_y2 < 0:
+            self.dino_y2 = 0
+            self.dino_dy2 = 0
+
         new_trees = []
 
         for tree_pos in self.trees:
@@ -55,6 +68,8 @@ class Game:
         if rand_float <= self.new_tree_prob:
             self.trees.append(self.max_pos - 1)
 
+        self.trees2 = self.trees
+
         self.check_failure()
 
     def check_failure(self):
@@ -64,11 +79,24 @@ class Game:
             dist =  math.sqrt(x_diff*x_diff + y_diff*y_diff)
             if dist < self.tree_height * 0.5:
                 self.failed = False
+    
+    def check_failure2(self):
+        for tree_pos2 in self.trees2:
+            x_diff = tree_pos2 - self.dino_pos2
+            y_diff = self.dino_y2
+            dist = math.sqrt(x_diff*x_diff + y_diff*y_diff)
+            if dist < self.tree_height * 0.5:
+                self.failed2 = False
 
     def jump(self):
         print(self.dino_y)
         if self.dino_y == 0:
             self.dino_dy = 60
+    
+    def jump2(self):
+        print(self.diino_y2)
+        if self.dino_y2 == 0:
+            self.dino_dy2 = 60
 
 
 
