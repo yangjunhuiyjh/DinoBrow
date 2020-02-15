@@ -98,7 +98,7 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 before = datetime. now()
 
-for i in range(100):
+for i in range(1):
     rects = detector(gray, 1)
 
 after = datetime. now()
