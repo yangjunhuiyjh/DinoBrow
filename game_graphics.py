@@ -26,9 +26,9 @@ class GameGraphics:
 
         self.graph_ratio = self.ground_len / self.game.max_pos
 
-        self.figure_x = 50
-        self.figure_y = 50
-        self.figure_size_x = 150
+        self.figure_x = 500
+        self.figure_y = 400
+        self.figure_size_x = 350
 
         self.figure_img = None
 

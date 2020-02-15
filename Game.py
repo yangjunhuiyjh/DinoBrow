@@ -68,7 +68,7 @@ class Game:
                 prev_tree_pos = self.trees[-1]
             else:
                 prev_tree_pos = 0
-            if self.max_pos - prev_tree_pos > 20 or self.max_pos - prev_tree_pos < 8:
+            if self.max_pos - prev_tree_pos > 20 or self.max_pos - prev_tree_pos < 5:
                 self.trees.append(self.max_pos - 1)
 
         self.trees2 = self.trees
