@@ -45,11 +45,18 @@ class Detector():
 
     def getData(self):
         coor = np.copy(self.coordinates)
+
         face_max = np.amax(coor[:, 1])
         face_min = np.amin(coor[:, 1])
-        brow_ave_height = (coor[20, 1] + coor[25, 1])/2
-        #print(face_max, face_min, brow_ave_height)
-        return (face_max, face_min, brow_ave_height)
+
+        if face_max == face_min:
+            return None
+
+        left_dist_to_eye = coor[37,1] - coor[19,1]
+        right_dist_to_eye = coor[44,1] - coor[24,1]
+
+        ave_dist_to_eye = (left_dist_to_eye + right_dist_to_eye) / 2
+        return ave_dist_to_eye/(face_max-face_min)
 
     def getLastFrame(self):
         return self.lastFrame

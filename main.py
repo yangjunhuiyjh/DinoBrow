@@ -9,7 +9,7 @@ def no_data(face_max, face_min, brow_ave_height):
 
 def main():
     detector = Detector.Detector()
-    game = Game.Game()
+    game = Game.Game(detector)
 
 
     is_calibrating = True
@@ -21,14 +21,14 @@ def main():
         events = pygame.event.get()
 
         if is_calibrating:
-            game.graphics.draw_calib()
+            game.graphics.draw_calib(calib_count,ref_y)
             game.graphics.swap_buf()
 
-            (face_max, face_min, brow_ave_height) = detector.getData()
-            if no_data(face_max, face_min, brow_ave_height):
+            this_y = detector.getData()
+            if this_y is None:
                 continue
 
-            this_y = (brow_ave_height - face_min) / (face_max - face_min)
+            print(this_y)
             ref_y = (ref_y*calib_count + this_y) / (calib_count+1)
             calib_count += 1
 
@@ -46,10 +46,9 @@ def main():
                 game.graphics.draw()
             game.graphics.swap_buf()
 
-            for event in events:
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_S:
-                        game.jump()
+            this_y = detector.getData()
+            if (this_y-ref_y)/ref_y >= 0.1:
+                game.jump()
 
 
 

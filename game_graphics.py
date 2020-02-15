@@ -53,10 +53,11 @@ class GameGraphics:
         textsurface = self.font.render('Lost', False, (0, 0, 0))
         self.game_display.blit(textsurface, (self.size_x/2, self.size_y/10))
 
-    def draw_calib(self):
+    def draw_calib(self,calib_count,ref_y):
         pygame.draw.rect(self.background, (0, 0, 0), (self.ground_x, self.ground_y, self.ground_len, 5))
         self.game_display.blit(self.background, (0, 0))
-        textsurface = self.font.render('Calibrating', False, (0, 0, 0))
+        text = 'Calibrating, #datapoints: '+ str(calib_count)+"    ref_y:"+str(ref_y)
+        textsurface = self.font.render(text, False, (0, 0, 0))
         self.game_display.blit(textsurface, (self.size_x / 2, self.size_y / 10))
 
     def swap_buf(self):
