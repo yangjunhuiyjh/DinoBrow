@@ -43,9 +43,10 @@ class Detector():
         return self.coordinates
 
     def getData(self):
-        face_max = np.amax(self.coordinates[:, 1])
-        face_min = np.amin(self.coordinates[:, 1])
-        brow_ave_height = (self.coordinates[20, 1] + self.coordinates[25, 1])/2
+        coor = np.copy(self.coordinates)
+        face_max = np.amax(coor[:, 1])
+        face_min = np.amin(coor[:, 1])
+        brow_ave_height = (coor[20, 1] + coor[25, 1])/2
         print(face_max, face_min, brow_ave_height)
         return (face_max, face_min, brow_ave_height)
 
