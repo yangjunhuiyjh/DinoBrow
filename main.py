@@ -50,6 +50,12 @@ def main():
             if (this_y-ref_y)/ref_y >= 0.1:
                 game.jump()
 
+            for event in events:
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_s:
+                        game.graphics.stop()
+                        game = Game.Game(detector)
+
 
 
 if __name__ == "__main__":

@@ -49,6 +49,11 @@ class GameGraphics:
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
 
     def draw(self):
+        self.game_display.fill((255,255,255))
+
+        pygame.draw.rect(self.background, (0, 0, 0), (self.ground_x, self.ground_y, self.ground_len, 5))
+        self.game_display.blit(self.background, (0, 0))
+
         self.figure_img = self.detector.getLastFrame()
         self.figure_img = cv2.cvtColor(self.figure_img, cv2.COLOR_BGR2RGB)
         self.figure_img = numpy.rot90(self.figure_img)
@@ -74,11 +79,15 @@ class GameGraphics:
         self.game_display.blit(textsurface, (self.size_x/2, self.size_y/10))
 
     def draw_calib(self,calib_count,ref_y):
-        pygame.draw.rect(self.background, (0, 0, 0), (self.ground_x, self.ground_y, self.ground_len, 5))
+
         self.game_display.blit(self.background, (0, 0))
         text = 'Calibrating, #datapoints: '+ str(calib_count)+"    ref_y:"+str(ref_y)
         textsurface = self.font.render(text, False, (0, 0, 0))
-        self.game_display.blit(textsurface, (self.size_x / 2, self.size_y / 10))
+        self.game_display.blit(textsurface, (0, self.size_y / 10))
+
+        text = 'Click s to start!'
+        textsurface = self.font.render(text, False, (0, 0, 0))
+        self.game_display.blit(textsurface, (0, self.size_y / 2))
 
     def swap_buf(self):
         pygame.display.update()
@@ -87,4 +96,3 @@ class GameGraphics:
 
     def stop(self):
         pygame.quit()
-        quit()
