@@ -42,14 +42,14 @@ class Detector():
         print("getter", self.coordinates)
         return self.coordinates
 
-    def getAvePoints(self):
+    def getData(self):
         face_max = np.amax(self.coordinates[:, 1])
         face_ave_height = np.mean(self.coordinates[:, 1], axis = 0)
-        brow_ave_height = np.mean(self.coordinates[18:28, 1], axis = 0)
+        brow_ave_height = (self.coordinates[20, 1] + self.coordinates[25, 1])/2
         print(face_max, face_ave_height, brow_ave_height)
         return (face_max, face_ave_height, brow_ave_height)
 
 if __name__ == "__main__":
     detector = Detector()
     while True:
-        detector.getAvePoints()
+        detector.getData()
