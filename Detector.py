@@ -37,10 +37,14 @@ class Detector():
             shape = self.predictor(image, rect)
             for i in range(0, 68):
                 self.coordinates[i] = (shape.part(i).x, shape.part(i).y)
-        print(self.coordinates)
 
     def getKeyPoints(self):
+        print("getter", self.coordinates)
         return self.coordinates
+
+    def getAvePoints(self):
+
+        return ( , )
 
 if __name__ == "__main__":
     detector = Detector()
