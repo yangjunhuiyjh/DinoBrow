@@ -20,6 +20,7 @@ class Detector():
             # Capture frame-by-frame
             ret, frame = cap.read()
             frame = imutils.resize(frame, width=300)
+            self.lastFrame = frame
 
             # Our operations on the frame come here
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -47,8 +48,11 @@ class Detector():
         face_max = np.amax(coor[:, 1])
         face_min = np.amin(coor[:, 1])
         brow_ave_height = (coor[20, 1] + coor[25, 1])/2
-        print(face_max, face_min, brow_ave_height)
+        #print(face_max, face_min, brow_ave_height)
         return (face_max, face_min, brow_ave_height)
+
+    def getLastFrame(self):
+        return self.lastFrame
 
 if __name__ == "__main__":
     detector = Detector()

@@ -1,8 +1,10 @@
 import random
 import  game_graphics
 import  pygame
+import  math
+
 class Game:
-    def __init__(self):
+    def __init__(self,detector):
         self.trees = [60, 90]
         self.dino_pos = 20
         self.min_pos = 0
@@ -18,7 +20,14 @@ class Game:
 
         self.tree_height = 6
 
+
+        self.failed = True
+
+
         self.graphics = game_graphics.GameGraphics(self)
+
+        self.detector = detector
+
 
 
     def step(self):
@@ -46,17 +55,32 @@ class Game:
         if rand_float <= self.new_tree_prob:
             self.trees.append(self.max_pos - 1)
 
+        self.check_failure()
+
+    def check_failure(self):
+        for tree_pos in self.trees:
+            x_diff = tree_pos - self.dino_pos
+            y_diff = self.dino_y
+            dist =  math.sqrt(x_diff*x_diff + y_diff*y_diff)
+            if dist < self.tree_height * 0.5:
+                self.failed = False
 
     def jump(self):
         print(self.dino_y)
         if self.dino_y == 0:
             self.dino_dy = 60
 
+
+
 if __name__ == "__main__":
     game = Game()
     while True:
-        game.step()
-        game.graphics.draw()
+        if not game.failed:
+            game.graphics.drawFailure()
+        else:
+            game.step()
+            game.graphics.draw()
+        game.graphics.swap_buf()
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.KEYDOWN:

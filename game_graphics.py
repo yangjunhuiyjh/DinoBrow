@@ -34,9 +34,10 @@ class GameGraphics:
         self.tree_size_x = self.tree_size_y
         self.tree_img = pygame.transform.scale(self.tree_img, (int(self.tree_size_x), int(self.tree_size_y)))
 
+        pygame.font.init()
+        self.font = pygame.font.SysFont('Comic Sans MS', 30)
+
     def draw(self):
-        pygame.draw.rect(self.background, (0, 0, 0), (self.ground_x, self.ground_y, self.ground_len, 5))
-        self.game_display.blit(self.background, (0,0))
 
         dino_pos_x = self.game.dino_pos * self.graph_ratio + self.ground_x
         dino_pos_y = self.ground_y - self.dino_size_y + -self.graph_ratio * self.game.dino_y
@@ -48,8 +49,20 @@ class GameGraphics:
             self.game_display.blit(self.tree_img, (tree_pos_x, tree_pos_y))
 
 
+    def drawFailure(self):
+        textsurface = self.font.render('Lost', False, (0, 0, 0))
+        self.game_display.blit(textsurface, (self.size_x/2, self.size_y/10))
+
+    def draw_calib(self):
+        pygame.draw.rect(self.background, (0, 0, 0), (self.ground_x, self.ground_y, self.ground_len, 5))
+        self.game_display.blit(self.background, (0, 0))
+        textsurface = self.font.render('Calibrating', False, (0, 0, 0))
+        self.game_display.blit(textsurface, (self.size_x / 2, self.size_y / 10))
+
+    def swap_buf(self):
         pygame.display.update()
         self.clock.tick(60)
+
 
     def stop(self):
         pygame.quit()
