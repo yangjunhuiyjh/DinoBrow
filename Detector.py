@@ -22,11 +22,13 @@ class Detector():
             # Capture frame-by-frame
             ret, frame = cap.read()
             frame = imutils.resize(frame, width=300)
-            
+
             self.lastFrame = frame
 
             # Our operations on the frame come here
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+
             self.readKeyPoints(gray)
 
         # When everything done, release the capture
