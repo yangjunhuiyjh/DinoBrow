@@ -22,6 +22,7 @@ class Detector():
             # Capture frame-by-frame
             ret, frame = cap.read()
             frame = imutils.resize(frame, width=300)
+            
             self.lastFrame = frame
 
             # Our operations on the frame come here

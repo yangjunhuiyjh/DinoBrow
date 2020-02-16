@@ -44,6 +44,7 @@ def main():
             else:
                 game.step()
                 game.graphics.draw()
+                game.speed_x -=0.03
             game.graphics.swap_buf()
 
             this_y = detector.getData()

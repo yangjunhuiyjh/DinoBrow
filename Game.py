@@ -13,7 +13,7 @@ class Game:
         self.trees2 = [60, 90]
         self.dino_pos2 = 20
 
-        self.new_tree_prob = 0.01
+        self.new_tree_prob = 0.05
 
 
         self.dino_y = 0
